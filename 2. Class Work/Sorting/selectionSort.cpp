@@ -2,9 +2,10 @@
 using namespace std;
 int findSmallest(int *arr,int size, int index){
     int result = 0;
-    for(int i=index;i<size;i++){
-        for(int j=index;j<size;j++){
-            if(arr[j] < arr[i])
+    int temp = arr[index];
+    for(int i=0;i<1;i++){
+        for(int j=i+1;j<size;j++){
+            if(temp > arr[j])
                 result = j;
         }
     }
