@@ -29,7 +29,7 @@ void mergeSort(int *arr, int *temp, int start, int end){
     merge(arr, temp, start, mid, end);
 }
 void sortArray(int *arr, int size){
-    int temp[6] = {0};
+    int temp[size] = {0};
     mergeSort(arr, temp, 0, size-1);
 }
 void printArray(int *arr, int size){

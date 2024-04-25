@@ -93,6 +93,36 @@ struct node* insert_after(struct node* start){
     newNode->next = ptr;
     return start;
 }
+struct node* insert_at_position(struct node* start){
+    struct node* newNode, *ptr, *preptr;
+    int position, i = 1, count = 0;
+    printf("Enter the position where you want to insert newNode : ");
+    scanf("%d",&position);
+    ptr = start;
+    while(ptr->next != NULL){
+        ptr = ptr->next;
+        count++;
+    }
+    if(position > count){
+        printf("WRONG POSITION \n");
+        return start;
+    }else{
+        int data;
+        ptr = start;
+        printf("Enter the data : ");
+        scanf("%d", &data);
+        newNode = (struct node*)malloc(sizeof(struct node));
+        newNode->data = data;
+        while(i<position){
+            preptr = ptr;
+            ptr = ptr->next;
+            i++;
+        }
+        newNode->next = ptr;
+        preptr->next = newNode;
+        return start;
+    }
+}
 struct node* delete_begi(struct node* start){
     struct node *ptr;
     ptr = start;
@@ -112,7 +142,7 @@ struct node* delete_end(struct node* start){
     return start;
 }
 struct node* delete_before(struct node* start){
-    struct node *ptr, *preptr;
+    struct node *ptr, *preptr,*prepreptr;
     int value;
     printf("Enter the value before which the node has to be deleted : ");
     scanf("%d",&value);
@@ -122,11 +152,12 @@ struct node* delete_before(struct node* start){
         return start;
     }else{
         while(ptr->data != value){
+            prepreptr = preptr;
             preptr = ptr;
             ptr = ptr->next;
         }
-        preptr->next = ptr->next;
-        free(ptr);
+        prepreptr->next = preptr->next;
+        free(preptr);
         return start;
     }
 }
@@ -169,11 +200,12 @@ int main(){
     printf("3. Insert at the Last\n");
     printf("4. Insert before\n");
     printf("5. Insert after\n");
-    printf("6. Delete from the beginning\n");
-    printf("7. Delete from the last\n");
-    printf("8. Delete before X\n");
-    printf("9. Delete after X\n");
-    printf("10. Display the List\n");
+    printf("6. Insert at the position\n");
+    printf("7. Delete from the beginning\n");
+    printf("8. Delete from the last\n");
+    printf("9. Delete before X\n");
+    printf("10. Delete after X\n");
+    printf("11. Display the List\n");
     do{
         printf("\nEnter your choice : ");
         scanf("%d",&option);
@@ -189,17 +221,19 @@ int main(){
                 break;
         case 5: start = insert_after(start);
                 break;
-        case 6: start = delete_begi(start);
+        case 6: start = insert_at_position(start);
                 break;
-        case 7: start = delete_end(start);
+        case 7: start = delete_begi(start);
                 break;
-        case 8: start = delete_before(start);
+        case 8: start = delete_end(start);
                 break;
-        case 9: start = delete_after(start);
+        case 9: start = delete_before(start);
                 break;
-        case 10: start = display(start);
+        case 10: start = delete_after(start);
+                break;
+        case 11: start = display(start);
                 break;
         }
-    }while(option != 11);
+    }while(option != 12);
     return 0;
 }

@@ -38,16 +38,15 @@ struct node* add_node(struct node* start,int coefficient, int degree){
     newNode = (struct node*)malloc(sizeof(struct node));
     newNode->degree = degree;
     newNode->coefficient = coefficient;
+    newNode->next = NULL;
     if(start == NULL){
         start = newNode;
-        newNode->next = NULL;
     }else{
         ptr = start;
         while(ptr->next != NULL){
             ptr = ptr->next;
         }
         ptr->next = newNode;
-        newNode->next = NULL;
     }
     return start;
 }

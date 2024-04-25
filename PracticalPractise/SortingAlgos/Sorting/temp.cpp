@@ -36,6 +36,7 @@ void sortArray(int *arr, int size){
     int temp[size] = {0};
     mergeSort(arr, temp, 0, size-1);
 }*/
+/*
 void bubbleSort(int *arr, int size){
     int sizeCpy = size;
     while(sizeCpy--){
@@ -51,6 +52,27 @@ void bubbleSort(int *arr, int size){
             }
         }
     }
+}*/
+void swap(int &a, int &b){
+    int temp = a;
+    a = b;
+    b = temp;
+}
+void quickSort(int *arr, int start, int end){
+    if(start >= end) return;
+    int pivot = end;
+    int j = start;
+    int i = start - 1;
+    while(j < pivot){
+        if(arr[j] < arr[pivot]){
+            i++;// important
+            swap(arr[i],arr[j]);
+        }j++;
+    }
+    i++;
+    swap(arr[i], arr[pivot]);
+    quickSort(arr, start, i-1);
+    quickSort(arr, i+1, end);
 }
 void printArray(int *arr, int size){
     for (int i = 0; i < size; i++){
@@ -68,7 +90,8 @@ int main(){
     }
     //insertionSort(arr, size);
     //sortArray(arr, size);
-    bubbleSort(arr, size);
+    //bubbleSort(arr, size);
+    quickSort(arr, 0, size-1);
     cout<<"Array after Sorting : ";
     printArray(arr, size);
     return 0;

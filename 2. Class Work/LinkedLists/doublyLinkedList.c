@@ -20,10 +20,7 @@ struct node* create_dll(struct node* start){
             newNode->prev = NULL;
             newNode->next = NULL;
         }else{
-            ptr = start;
-            while(ptr->next != NULL){
-                ptr = ptr->next;
-            }
+            ptr = end;
             ptr->next = newNode;
             newNode->prev = ptr;
             newNode->next = NULL;
@@ -62,7 +59,7 @@ struct node* insert_end(struct node* start){
     return start;
 }
 struct node* insert_before(struct node* start){
-    struct node *newNode, *ptr;
+    struct node *newNode, *ptr, *prepreptr;
     int data, value;
     printf("Enter the data : ");
     scanf("%d",&data);
@@ -110,7 +107,7 @@ struct node* insert_after(struct node* start){
         }
         newNode->prev = ptr;
         newNode->next = ptr->next;
-        ptr->next = newNode;
+        newNode->prev->next = newNode;
         newNode->next->prev = newNode;
     }
     printf("Node Inserted !!!");
